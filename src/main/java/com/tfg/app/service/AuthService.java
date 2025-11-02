@@ -35,4 +35,6 @@ public class AuthService {
         usuario.setContrasena(hashedPassword);
         usuarioRepository.save(usuario);
     }
+
+    
 }

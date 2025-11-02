@@ -20,6 +20,10 @@ public class Gasto {
     private Boolean recurrente = false; 
     private String frecuencia;
 
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+
     // --- Getters y Setters ---
 
     public Long getId() {
@@ -85,4 +89,18 @@ public class Gasto {
     public void setFrecuencia(String frecuencia) {
         this.frecuencia = frecuencia;
     }
+
+    public Boolean getRecurrente() {
+        return recurrente;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    
 }
