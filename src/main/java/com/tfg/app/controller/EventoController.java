@@ -63,7 +63,14 @@ public class EventoController {
             Gasto gasto = new Gasto();
             gasto.setNombre(evento.getTitulo());
             gasto.setDescripcion(evento.getDescripcion());
-            gasto.setCategoria(nombreCategoria);
+            Categoria categoria = categoriaRepository.findByNombre(nombreCategoria)
+                    .orElseGet(() -> {
+                        Categoria nueva = new Categoria();
+                        nueva.setNombre(nombreCategoria);
+                        nueva.setColor("#808080");
+                        return categoriaRepository.save(nueva);
+                    });
+            gasto.setCategoria(categoria);
             gasto.setCantidad(evento.getCantidad());
             gasto.setFecha(evento.getFechaInicio().toLocalDate());
             gasto.setRecurrente(false);
@@ -107,14 +114,14 @@ public class EventoController {
                 Gasto gasto = evento.getGasto();
                 gasto.setNombre(eventoDetalles.getTitulo());
                 gasto.setDescripcion(eventoDetalles.getDescripcion());
-                gasto.setCategoria(eventoDetalles.getCategoria().getNombre()); // ✅ Con nombre correcto
+                gasto.setCategoria(eventoDetalles.getCategoria()); 
                 gasto.setCantidad(eventoDetalles.getCantidad());
                 gasto.setFecha(eventoDetalles.getFechaInicio().toLocalDate());
             } else {
                 Gasto gasto = new Gasto();
                 gasto.setNombre(eventoDetalles.getTitulo());
                 gasto.setDescripcion(eventoDetalles.getDescripcion());
-                gasto.setCategoria(eventoDetalles.getCategoria().getNombre()); // ✅ Con nombre correcto
+                gasto.setCategoria(eventoDetalles.getCategoria()); 
                 gasto.setCantidad(eventoDetalles.getCantidad());
                 gasto.setFecha(eventoDetalles.getFechaInicio().toLocalDate());
                 gasto.setRecurrente(false);

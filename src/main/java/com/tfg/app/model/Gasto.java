@@ -12,17 +12,21 @@ public class Gasto {
     private Long id;
 
     private String nombre;
-    private String categoria;
     private String descripcion;
     private Double cantidad;
     private LocalDate fecha;
 
-    private Boolean recurrente = false; 
+    private Boolean recurrente = false;
     private String frecuencia;
+    private LocalDate fechaUltimaEjecucion;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
+    private Categoria categoria;
 
     // --- Getters y Setters ---
 
@@ -40,14 +44,6 @@ public class Gasto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
     }
 
     public String getDescripcion() {
@@ -102,5 +98,20 @@ public class Gasto {
         this.usuario = usuario;
     }
 
-    
+    public LocalDate getFechaUltimaEjecucion() {
+        return fechaUltimaEjecucion;
+    }
+
+    public void setFechaUltimaEjecucion(LocalDate fechaUltimaEjecucion) {
+        this.fechaUltimaEjecucion = fechaUltimaEjecucion;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
 }

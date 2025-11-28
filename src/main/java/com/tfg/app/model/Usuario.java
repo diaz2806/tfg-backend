@@ -14,6 +14,7 @@ public class Usuario {
 
     private String nombre;
     private String contrasena;
+    private Double sueldo = 0.0;
 
     public Long getId() {
         return id;
@@ -47,4 +48,13 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
+    public Double getSueldo() {
+        return sueldo;
+    }
+
+    public void setSueldo(Double sueldo) {
+        this.sueldo = sueldo;
+    }
+
+    
 }

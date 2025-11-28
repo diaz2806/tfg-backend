@@ -38,6 +38,13 @@ public class Evento {
     @JoinColumn(name = "id_gasto")
     private Gasto gasto;
 
+    private Boolean esRecurrente = false;
+
+    private String frecuencia;
+
+    @Column(name = "fecha_ultima_generacion")
+    private LocalDateTime fechaUltimaGeneracion;
+
     public Long getId() {
         return id;
     }
@@ -116,6 +123,30 @@ public class Evento {
 
     public void setGasto(Gasto gasto) {
         this.gasto = gasto;
+    }
+
+    public Boolean getEsRecurrente() {
+        return esRecurrente;
+    }
+
+    public void setEsRecurrente(Boolean esRecurrente) {
+        this.esRecurrente = esRecurrente;
+    }
+
+    public String getFrecuencia() {
+        return frecuencia;
+    }
+
+    public void setFrecuencia(String frecuencia) {
+        this.frecuencia = frecuencia;
+    }
+
+    public LocalDateTime getFechaUltimaGeneracion() {
+        return fechaUltimaGeneracion;
+    }
+
+    public void setFechaUltimaGeneracion(LocalDateTime fechaUltimaGeneracion) {
+        this.fechaUltimaGeneracion = fechaUltimaGeneracion;
     }
 
     
