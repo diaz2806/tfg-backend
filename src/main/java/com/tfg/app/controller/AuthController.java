@@ -23,13 +23,13 @@ public class AuthController {
 
         Usuario usuario = authService.login(email, contrasena);
         if (usuario != null) {
-            // devolvemos el usuario como JSON
             return ResponseEntity.ok(Map.of(
                 "message", "Login correcto",
                 "usuario", Map.of(
                     "id", usuario.getId(),
                     "nombre", usuario.getNombre(),
                     "email", usuario.getEmail()
+                    // ✅ No incluye la contraseña
                 )
             ));
         } else {
@@ -47,10 +47,14 @@ public class AuthController {
         try {
             authService.register(nombre, email, contrasena);
             return ResponseEntity.ok(Map.of("message", "Usuario registrado correctamente"));
+        } catch (RuntimeException e) {
+            // ✅ Devuelve el error específico (ej: email duplicado)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", e.getMessage()));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("error", e.getMessage()));
+                    .body(Map.of("error", "Error interno del servidor"));
         }
     }
 }

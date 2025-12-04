@@ -23,7 +23,7 @@ public class EventoController {
     private UsuarioService usuarioService;
 
     @Autowired
-    private CategoriaRepository categoriaRepository; // ✅ AÑADIR
+    private CategoriaRepository categoriaRepository;
 
     @GetMapping("/usuario/{idUsuario}")
     public List<Evento> obtenerEventosPorUsuario(@PathVariable Long idUsuario) {

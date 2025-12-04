@@ -74,37 +74,6 @@ public class GastoController {
             // 1. Guardar el gasto
             Gasto gastoGuardado = gastoRepository.save(gasto);
 
-            // 2. Si es recurrente → crear evento recurrente en calendario
-            if (gasto.getRecurrente() != null && gasto.getRecurrente()) {
-
-                Evento evento = new Evento();
-                evento.setTitulo("Gasto recurrente: " + gasto.getNombre());
-                evento.setDescripcion("Se repite " + gasto.getFrecuencia().toLowerCase());
-                evento.setFechaInicio(LocalDateTime.now());
-                evento.setFechaFin(LocalDateTime.now().plusHours(1));
-                evento.setConGasto(true);
-                evento.setCantidad(gasto.getCantidad());
-                evento.setUsuario(gasto.getUsuario());
-
-                // Si no tiene categoría, ponemos "Otros"
-                if (gasto.getCategoria() == null) {
-                    evento.setCategoria(categoriaRepository.findByNombre("Otros")
-                            .orElseThrow(() -> new RuntimeException("Categoría 'Otros' no encontrada")));
-                } else {
-                    evento.setCategoria(gasto.getCategoria());
-                }
-
-                evento.setGasto(gastoGuardado);
-
-                // CAMPOS RECURRENTES
-                evento.setEsRecurrente(true);
-                evento.setFrecuencia(gasto.getFrecuencia());
-                evento.setFechaUltimaGeneracion(LocalDateTime.now());
-
-                // GUARDAR CON EL REPOSITORIO CORRECTO
-                eventoRepository.save(evento);
-            }
-
             return ResponseEntity.ok(gastoGuardado);
 
         } catch (Exception e) {

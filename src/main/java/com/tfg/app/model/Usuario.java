@@ -1,5 +1,7 @@
 package com.tfg.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +15,8 @@ public class Usuario {
     private String email;
 
     private String nombre;
+
+    @JsonIgnore
     private String contrasena;
     private Double sueldo = 0.0;
 
