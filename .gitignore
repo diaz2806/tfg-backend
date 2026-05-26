@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Security & dependencies ###
+.env
+.env.local
+.env.*.local
+node_modules/
+
